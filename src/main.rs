@@ -65,6 +65,7 @@ fn get_user_hand() -> ([i32;NUMBER_OF_PINS as usize],bool) {
             return (user_hand,false);
         } else {
             println!("You should enter {} digits, seperated by a space, in the range 1 - {}",NUMBER_OF_PINS, NUMBER_OF_COLORS);
+            println!("Type \"quit\" if you wish to stop the game");
             guess.clear();
         }
     }
@@ -147,5 +148,6 @@ fn print_rules() {
     println!("-         - A white pin means that one of the digit you chose is present in his code, but not at the right spot");
     println!("-     Good luck !");
     println!("You should enter {} digits, seperated by a space, in the range 1 - {}",NUMBER_OF_PINS, NUMBER_OF_COLORS);
+    println!("Type \"quit\" if you wish to stop the game");
     println!("Please enter your first guess :")
 }
