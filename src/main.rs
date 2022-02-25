@@ -13,15 +13,17 @@ fn main() {
     let mut rng = rand::thread_rng();
     let master:[i32;NUMBER_OF_PINS as usize] = [(); NUMBER_OF_PINS as usize].map(|_| rng.gen_range(1..NUMBER_OF_COLORS+1));
     let mut count = 1;
+    print_rules();
     //println!("Solution :");
     //print_line(master);
 
     loop {
+        println!("--- TURN n°{} ---",count);
         let (user_hand, stop) = get_user_hand();
         if stop { break;}
 
         let (red_pins, white_pins) = compare_hands(&master,&user_hand);
-        println!("--- TURN {} --- Red pins: {}, white pins: {}",count, red_pins, white_pins);
+        println!("Red pins: {}, white pins: {}", red_pins, white_pins);
         if red_pins == NUMBER_OF_PINS {
             println!("You won ! The solution was :");
             print_line(master);
@@ -62,7 +64,7 @@ fn get_user_hand() -> ([i32;NUMBER_OF_PINS as usize],bool) {
     if !error {
             return (user_hand,false);
         } else {
-            println!("You should enter NUMBER_OF_PINS numbers, seperated by a space, in the range 1 - NUMBER_OF_PINS");
+            println!("You should enter {} digits, seperated by a space, in the range 1 - {}",NUMBER_OF_PINS, NUMBER_OF_COLORS);
             guess.clear();
         }
     }
@@ -132,4 +134,18 @@ fn compare_hands(master:&[i32;NUMBER_OF_PINS as usize],user:&[i32;NUMBER_OF_PINS
     }
 
     (red_pin, white_pin)
+}
+
+fn print_rules() {
+    println!("--- Mastermind ---");
+    println!("- Rules :");
+    println!("-     Find the master's code, made up of 5 digits from 1 to 8 ");
+    println!("-     You have 12 tries, if you fail to discover the master's code in less than 12 tries you loose");
+    println!("-     At each turn, you enter your guess in the format \"1 2 3 4 5\" (your digits are to be seperated by a space)");
+    println!("-     The master will give you a hint about how close is your guess from his code with pins :");
+    println!("-         - A red pin means that one of the digit you chose is the right one and is in the right spot");
+    println!("-         - A white pin means that one of the digit you chose is present in his code, but not at the right spot");
+    println!("-     Good luck !");
+    println!("You should enter {} digits, seperated by a space, in the range 1 - {}",NUMBER_OF_PINS, NUMBER_OF_COLORS);
+    println!("Please enter your first guess :")
 }
