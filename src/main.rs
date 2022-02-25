@@ -1,8 +1,8 @@
 use rand::Rng;
 use std::io;
 
-const NUMBER_OF_PINS : i32 = 5;
-const NUMBER_OF_COLORS : i32 = 8;
+const NUMBER_OF_PINS : i32 = 4;
+const NUMBER_OF_COLORS : i32 = 6;
 const MAX_TURN : i32 = 12;
 static DEFAULT_HAND : [i32;NUMBER_OF_PINS as usize] = [0;NUMBER_OF_PINS as usize];
 
