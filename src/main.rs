@@ -6,6 +6,17 @@ const NUMBER_OF_COLORS : i32 = 6;
 const MAX_TURN : i32 = 12;
 static DEFAULT_HAND : [i32;NUMBER_OF_PINS as usize] = [0;NUMBER_OF_PINS as usize];
 
+struct Pins {
+    red: i32,
+    white: i32
+}
+
+impl Pins {
+    fn print(&self) {
+        println!("Red pins: {}, white pins: {}", self.red, self.white);
+    }
+}
+
 
 fn main() {
 
@@ -22,9 +33,9 @@ fn main() {
         let (user_hand, stop) = get_user_hand();
         if stop { break;}
 
-        let (red_pins, white_pins) = compare_hands(&master,&user_hand);
-        println!("Red pins: {}, white pins: {}", red_pins, white_pins);
-        if red_pins == NUMBER_OF_PINS {
+        let pins = compare_hands(&master,&user_hand);
+        pins.print();
+        if pins.red == NUMBER_OF_PINS {
             println!("You won ! The solution was :");
             print_line(master);
             break;
@@ -73,9 +84,10 @@ fn get_user_hand() -> ([i32;NUMBER_OF_PINS as usize],bool) {
 
 fn parse_user_input(guess:&str) -> ([i32;NUMBER_OF_PINS as usize],bool) {
     let split = guess.split(' ');
-    let mut guess_int : Vec<i32> = vec![];
+    let mut array = [0;NUMBER_OF_PINS as usize];
 
     //Parse each number, stop if there are letters or out of range numbers
+    let mut i = 0;
     for s in split {
         let num:i32 = match s.trim().parse() {
             Ok(num) => num,
@@ -85,17 +97,14 @@ fn parse_user_input(guess:&str) -> ([i32;NUMBER_OF_PINS as usize],bool) {
             return (DEFAULT_HAND,true);
         }
 
-        guess_int.push(num);
-        if guess_int.len() >= NUMBER_OF_PINS as usize{
+        if i >= NUMBER_OF_PINS as usize{
             break;
         }
+        array[i]=num;
+        i+=1;
     }
-    let len_ok : bool = guess_int.len()>=NUMBER_OF_PINS as usize;
+    let len_ok : bool = i >= NUMBER_OF_PINS as usize;
     if len_ok {
-        let mut array = [0;NUMBER_OF_PINS as usize];
-        for i in 0..array.len() {
-            array[i]=guess_int[i];
-        }
         return (array,false)
     } else 
     {
@@ -106,7 +115,7 @@ fn parse_user_input(guess:&str) -> ([i32;NUMBER_OF_PINS as usize],bool) {
 //2 if good color in right spot
 //1 if good color but not good spot
 //0 if not good color
-fn compare_hands(master:&[i32;NUMBER_OF_PINS as usize],user:&[i32;NUMBER_OF_PINS as usize]) -> (i32,i32){
+fn compare_hands(master:&[i32;NUMBER_OF_PINS as usize],user:&[i32;NUMBER_OF_PINS as usize]) -> Pins{
     let len = master.len();
     let mut red_pin = 0;
     let mut white_pin = 0;
@@ -134,7 +143,7 @@ fn compare_hands(master:&[i32;NUMBER_OF_PINS as usize],user:&[i32;NUMBER_OF_PINS
         }
     }
 
-    (red_pin, white_pin)
+    Pins{red:red_pin,white:white_pin}
 }
 
 fn print_rules() {
