@@ -25,8 +25,6 @@ fn main() {
     let master:[i32;NUMBER_OF_PINS as usize] = [(); NUMBER_OF_PINS as usize].map(|_| rng.gen_range(1..NUMBER_OF_COLORS+1));
     let mut count = 1;
     print_rules();
-    //println!("Solution :");
-    //print_line(master);
 
     loop {
         println!("--- TURN n°{} ---",count);
@@ -147,11 +145,16 @@ fn compare_hands(master:&[i32;NUMBER_OF_PINS as usize],user:&[i32;NUMBER_OF_PINS
 }
 
 fn print_rules() {
+    let mut format = String::new();
+    for i in 0..NUMBER_OF_PINS{
+        let num = format!("{}{}",i.to_string(), if i!=NUMBER_OF_PINS-1 {" "} else {""});
+        format.push_str(&num);
+    }
     println!("--- Mastermind ---");
     println!("- Rules :");
     println!("-     Find the master's code, made up of 5 digits from 1 to 8 ");
     println!("-     You have 12 tries, if you fail to discover the master's code in less than 12 tries you loose");
-    println!("-     At each turn, you enter your guess in the format \"1 2 3 4 5\" (your digits are to be seperated by a space)");
+    println!("-     At each turn, you enter your guess in the format \"{}\" (your digits are to be seperated by a space)",format);
     println!("-     The master will give you a hint about how close is your guess from his code with pins :");
     println!("-         - A red pin means that one of the digit you chose is the right one and is in the right spot");
     println!("-         - A white pin means that one of the digit you chose is present in his code, but not at the right spot");
