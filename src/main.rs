@@ -110,9 +110,9 @@ fn parse_user_input(guess:&str) -> ([i32;NUMBER_OF_PINS as usize],bool) {
     };
 }
 
-//2 if good color in right spot
-//1 if good color but not good spot
-//0 if not good color
+//red pin if good color in right spot
+//white if good color but not good spot
+//Compares the user'hand with the master's code and return a Pins struct
 fn compare_hands(master:&[i32;NUMBER_OF_PINS as usize],user:&[i32;NUMBER_OF_PINS as usize]) -> Pins{
     let len = master.len();
     let mut red_pin = 0;
