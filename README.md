@@ -17,7 +17,7 @@
 ## General Information
 Mastermind or Master Mind is a code-breaking game for two players.
 
-![Example screenshot](./img/Mastermind.png)
+![Example screenshot](./img/ui.gif)
 
 I implemented the version as a training to learn the Rust programming language.
 
