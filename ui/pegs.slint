@@ -1,0 +1,75 @@
+export struct CodePegsStruct := {
+        white_pin: int,
+        red_pin: int,
+    }
+
+//Displays a user's peg
+export Peg := Rectangle {
+        callback clicked;
+        property <length> xPos;
+        property <length> yPos;
+        property <brush> brush_color;
+
+        x: xPos;
+        y: yPos;
+        width: 50px;
+        height: 50px;
+        background: brush_color;
+        border-width: 2px;
+        border-color: black;
+        border-radius: width/2;
+
+        TouchArea {
+            clicked => {
+                // Delegate to the user of this element
+                root.clicked();
+            }
+        }
+    }
+
+//displays the master's answer
+export CodePegs := Rectangle{
+    property <length> xPos;
+    property <length> yPos;
+    property <int> number_of_white;
+    property <int> number_of_red;
+
+    x:xPos;
+    y:yPos;
+
+    width:65px;
+    height:50px;
+
+    Rectangle {
+        x: 10px;
+        y: 10px;
+        width: 20px;
+        height: 20px;
+        background: white;
+        border-width: 1px;
+        border-color: black;
+        border-radius: width/2;
+
+        Text {
+            x:4px;
+            y:3px;
+            text:number_of_white;
+        }
+    }
+    Rectangle {
+        x: 35px;
+        y: 10px;
+        width: 20px;
+        height: 20px;
+        background: red;
+        border-width: 1px;
+        border-color: black;
+        border-radius: width/2;
+
+        Text {
+            x:4px;
+            y:3px;
+            text:number_of_red;
+        }
+    }
+}

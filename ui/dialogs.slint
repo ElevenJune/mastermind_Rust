@@ -1,0 +1,26 @@
+import { StandardButton, Button } from "std-widgets.slint";
+import { Peg } from "./pegs.slint";
+
+export EndDialog := Rectangle {
+    callback clicked;
+    property <string> displayed_text;
+    Rectangle{
+        background:white;
+        border-width: 2px;
+        border-color: black;
+        //width:100px;
+        //height:root;
+        Text {
+            x:10px;
+            y:10px;
+            text: displayed_text;
+        }
+        /*Button {
+            text: "Retry";
+            clicked=>{
+                root.clicked();
+            }
+        }*/
+    }
+    
+}

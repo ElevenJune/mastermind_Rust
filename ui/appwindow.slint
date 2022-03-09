@@ -1,0 +1,63 @@
+import { Button } from "std-widgets.slint";
+import { CodePegs, Peg, CodePegsStruct } from "./pegs.slint";
+import {EndDialog} from "./dialogs.slint";
+
+export AppWindow := Window {
+        width: 60px+(50+10)*4px;
+        height: (50+10)*13px;
+        property <[brush]> colors: [Colors.red,Colors.blue,Colors.green,
+                                    Colors.yellow,Colors.purple,Colors.white];
+
+        property <[int]> board:[];
+        property <[int]> master:[];
+        property <[CodePegsStruct]> code_pegs:[];
+        property <int> current_line:0;
+        property <bool> finished:false;
+        property <bool> victory:false;
+
+        callback check_line();
+        callback reset();
+
+        for peg[i] in board : Peg {
+            xPos: 20px + mod(i, 4) * 55 * 1px;
+            yPos: 20px + floor(i / 4) * 55 * 1px;
+            brush_color: colors[peg];
+            clicked => {
+                if(floor(i/4)<current_line) {return;}
+                peg+=1;
+                if(peg>5) {peg = 0};
+            }
+        }
+
+        for code[i] in code_pegs : CodePegs{
+            xPos: root.width - self.width;
+            yPos: 20px + i * 55px;
+            number_of_white: code.white_pin;
+            number_of_red: code.red_pin;
+        }
+
+        if finished : EndDialog{
+            height: root.height/4;
+            width: root.width*80%;
+            x : root.width*10%;
+            y: root.height/4;
+            displayed_text: {if(victory){"You won ! The solution was :"}else{"You lose ! The solution was :"}};
+            clicked=>{
+                root.reset();
+            }
+            for peg[i] in master : Peg {
+                xPos: 20px + mod(i, 4) * 55 * 1px;
+                yPos: 40px;
+                brush_color: colors[peg];
+            }
+        }
+        
+        if !finished : Button{
+            x: root.width/2 - self.width/2;
+            y: root.height - self.height -10px;
+            height: 20px;
+            width:80%;
+            text : "Check";
+            clicked => {current_line+=1; root.check_line();}
+        } 
+    }
