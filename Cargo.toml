@@ -1,9 +1,15 @@
 [package]
-name = "mastermind"
+name = "mastermind-slint"
 version = "0.1.0"
-edition = "2021"
+authors = ["Guillaume Vandeneeckhoutte <guillaume.vande@gmail.com>"]
+edition = "2018"
+build = "build.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+slint = "0.2"
 rand = "0.8.3"
+
+[build-dependencies]
+slint-build = "0.2"
