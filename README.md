@@ -16,6 +16,7 @@
 
 ## General Information
 Mastermind or Master Mind is a code-breaking game for two players.
+Coded in Rust with slint. If the slint part does not compile for you, you can try the terminal version on tag v0.1
 
 ![Example screenshot](./img/ui.gif)
 
@@ -43,7 +44,7 @@ Other rules may be specified.
 
 ## Technologies Used
 - Rust 1.58.1 with Cargo 1.58.0
-- Crate : rand 0.8.3
+- Crate : rand 0.8.3 and slint 0.2
 
 
 ## Features
@@ -73,7 +74,6 @@ Project is in progress.
 
 ## Room for Improvement
 Room for improvement:
-- Add a GUI
 - Take the number of pins and colors as an argument
 
 
