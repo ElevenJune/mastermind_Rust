@@ -1,5 +1,5 @@
 # Mastermind in Rust
-> Masterming game coded in Rust
+> Mastermind game coded in Rust
 
 ## Table of Contents
 * [General Info](#general-information)
